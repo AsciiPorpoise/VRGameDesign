@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(new Vector3(mx * speed, 0.0f, my * speed));
         if (Input.GetKeyDown(KeyCode.Space) && !jump)
         {
-            rb.AddForce(new Vector3(0f, 15f, 0f), ForceMode.VelocityChange);
-            rb.AddForce(new Vector3(0f, -100f, 0f), ForceMode.Acceleration);
+            rb.AddForce(new Vector3(0f, 20f, 0f), ForceMode.VelocityChange);
             // rb.AddExplosionForce(10f, transform.position + new Vector3(0f, -1f, 0f), 10f);
             jump = true;
         }
@@ -44,8 +43,10 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter(Collider target)
     {
         Debug.Log(target.gameObject.GetType());
-        if(target.gameObject)
-        Destroy(target.gameObject);
+        if(target.gameObject.CompareTag("Pickup"))
+        {
+            Destroy(target.gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
