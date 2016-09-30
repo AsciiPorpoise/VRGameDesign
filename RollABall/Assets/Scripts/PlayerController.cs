@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log(target.gameObject.GetType());
         if(target.gameObject.CompareTag("Pickup"))
         {
-            Destroy(target.gameObject);
+            target.gameObject.GetComponent<PickupController>().Die();
         }
     }
 
