@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -8,6 +9,9 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 rinit;
     private bool jump;
+
+    private int score;
+    private Text scoreLabel;
 
     void Start ()
     {
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         if(target.gameObject.CompareTag("Pickup"))
         {
             target.gameObject.GetComponent<PickupController>().Die();
+            BumpScore();
         }
     }
 
@@ -53,4 +58,16 @@ public class PlayerController : MonoBehaviour {
     {
         jump = false;
     }
+
+    public void BumpScore()
+    {
+        this.score += 100;
+        if (scoreLabel == null)
+        {
+            scoreLabel = GameObject.Find("ScoreLabel").GetComponent<Text>();
+        }
+        scoreLabel.text = this.score.ToString();
+
+    }
 }
+
