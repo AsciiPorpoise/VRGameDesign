@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
 
     private Vector3 rinit;
+    private Vector3 calib;
     private bool jump;
 
     private int score;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         rinit = transform.position;
+        calib = 4*Input.acceleration;
         jump = false;
     }
 
@@ -26,8 +29,8 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float my = Input.GetAxis("Vertical");
-        float mx = Input.GetAxis("Horizontal");
+        float my = Input.GetAxis("Vertical") - Input.acceleration.z*4 + calib.z;
+        float mx = Input.GetAxis("Horizontal") + Input.acceleration.x*4 - calib.x;
 
         rb.AddForce(new Vector3(mx * speed, 0.0f, my * speed));
         if (Input.GetKeyDown(KeyCode.Space) && !jump)

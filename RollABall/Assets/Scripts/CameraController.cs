@@ -12,6 +12,11 @@ public class CameraController : MonoBehaviour {
         offset = transform.position - player.transform.position;
 	}
 	
+    void Update()
+    {
+        Debug.Log("Gyro"+Input.acceleration);
+    }
+
 	// Update is called once per frame
 	void LateUpdate () {
         transform.position = player.transform.position + offset;
