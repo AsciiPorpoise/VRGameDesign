@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     private bool jump;
 
     private int score;
-    private Text scoreLabel;
+    private TextMesh scoreLabel;
 
     void Start ()
     {
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
         this.score += 100;
         if (scoreLabel == null)
         {
-            scoreLabel = GameObject.Find("ScoreLabel").GetComponent<Text>();
+            scoreLabel = GameObject.Find("ScoreLabel").GetComponent<TextMesh>();
         }
         scoreLabel.text = this.score.ToString();
 
