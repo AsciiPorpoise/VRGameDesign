@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 calib;
     private bool jump;
 
+
     private int score;
     private TextMesh scoreLabel;
 
@@ -54,6 +55,13 @@ public class PlayerController : MonoBehaviour {
         {
             target.gameObject.GetComponent<PickupController>().Die();
             BumpScore();
+        }
+        else if(target.gameObject.CompareTag("Respawn"))
+        {
+            transform.position = rinit;
+            transform.rotation = Quaternion.identity;
+            rb.velocity = new Vector3();
+            rb.angularVelocity = new Vector3();
         }
     }
 
