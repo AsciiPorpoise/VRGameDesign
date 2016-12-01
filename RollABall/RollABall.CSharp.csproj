@@ -108,7 +108,6 @@
     <Compile Include="Assets\ProgressBar\Script\Utils.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\DeathController.cs" />
-    <Compile Include="Assets\Scripts\DestructibleObject.cs" />
     <Compile Include="Assets\Scripts\InvincibilityMode.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Net.cs" />
