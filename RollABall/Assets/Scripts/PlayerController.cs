@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour {
     private TextMesh scoreLabel;
     private TextMesh scoreLabelShadow;
 
+    private static int currentLevel = 1;
+
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour {
         jump = false;
         dscore = 0;
         score = 0;
+        Debug.Log("Level: " + currentLevel);
     }
 
     void Update () {
@@ -68,9 +71,9 @@ public class PlayerController : MonoBehaviour {
         {
             target.gameObject.GetComponent<PickupController>().Die();
             BumpScore();
-            SceneManager.LoadScene("Level2");
+            currentLevel++;
             Die();
-
+            SceneManager.LoadScene("Level" + currentLevel);
         }
         else if (target.gameObject.CompareTag("Pickup"))
         {
