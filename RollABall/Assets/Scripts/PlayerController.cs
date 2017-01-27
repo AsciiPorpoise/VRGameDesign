@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     private bool jump;
     private bool levelLoading;
 
+    private GameObject splash;
 
     private int score;
     private float dscore;
@@ -33,9 +34,19 @@ public class PlayerController : MonoBehaviour {
         dscore = 0;
         score = 0;
         Debug.Log("Level: " + currentLevel);
+
+        splash = GameObject.Find("PopupSplash");
+        if(splash)
+        {
+            splash.SetActive(false);
+        }
     }
 
     void Update () {
+        if(rb && rb.isKinematic)
+        {
+            return;
+        }
         dscore += Time.deltaTime;
         if(dscore >=1f)
         {
@@ -78,7 +89,7 @@ public class PlayerController : MonoBehaviour {
             currentLevel++;
             Die();
             Debug.Log("Loading level " + currentLevel);
-            Invoke("loadQueued", 2);
+            //Invoke("loadQueued", 2);
             //SceneManager.LoadScene("Level" + currentLevel);
         }
         else if (target.gameObject.CompareTag("Pickup"))
@@ -102,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 
     public void loadQueued()
     {
-        SceneManager.LoadScene("Level" + currentLevel);
+        //SceneManager.LoadScene("Level" + currentLevel);
     }
 
     public void BumpScore()
@@ -131,6 +142,14 @@ public class PlayerController : MonoBehaviour {
         GameObject.Instantiate(death, transform.position, transform.rotation);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         rb.isKinematic = true;
+        if (splash)
+        {
+            splash.SetActive(true);
+            GameObject.Find("Count").GetComponent<SplashController>().Begin() ;
+        } else
+        {
+            Debug.LogError("ERROR: PopupSplash NOT FOUND!");
+        }
         //Destroy(gameObject);
     }
 }
