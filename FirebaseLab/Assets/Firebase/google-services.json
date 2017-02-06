@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "46402606709",
+    "firebase_url": "https://droidremote-6f969.firebaseio.com",
+    "project_id": "droidremote-6f969",
+    "storage_bucket": "droidremote-6f969.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46402606709:android:dcbb4ffe6952db4b",
+        "android_client_info": {
+          "package_name": "io.github.matticoli.FirebaseLab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46402606709-fmkm18820rgqpahrjh2f1ever9e5raai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgG0_q5cu11B9VMaT_KF6WKtUXHwTwbkY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

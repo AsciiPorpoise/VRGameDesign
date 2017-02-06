@@ -61,11 +61,20 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Google.MiniJson">
-      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Database">
       <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Database.Unity">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
     <Reference Include="Google.Sharpen">
       <HintPath>Assets\Firebase\Plugins\Google.Sharpen.dll</HintPath>
@@ -73,17 +82,8 @@
     <Reference Include="Unity.Compat">
       <HintPath>Assets\Firebase\Plugins\Unity.Compat.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Database.Unity">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Database.Unity.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Auth">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +95,7 @@
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
     <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
     <None Include="Assets\Plugins\Android\firebase-common-10.0.1\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\firebase-common-10.0.1\proguard.txt" />
   </ItemGroup>

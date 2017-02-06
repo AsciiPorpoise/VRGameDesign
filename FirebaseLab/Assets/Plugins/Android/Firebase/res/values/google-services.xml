@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="firebase_database_url" translatable="false">https://droidremote-6f969.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">46402606709</string>
+  <string name="google_storage_bucket" translatable="false">droidremote-6f969.appspot.com</string>
+  <string name="google_api_key" translatable="false">AIzaSyAgG0_q5cu11B9VMaT_KF6WKtUXHwTwbkY</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAgG0_q5cu11B9VMaT_KF6WKtUXHwTwbkY</string>
+  <string name="google_app_id" translatable="false">1:46402606709:android:dcbb4ffe6952db4b</string>
+  <string name="default_web_client_id" translatable="false">46402606709-fmkm18820rgqpahrjh2f1ever9e5raai.apps.googleusercontent.com</string>
+</resources>
