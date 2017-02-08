@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class Ctrl : MonoBehaviour {
+public class Ctrl : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        Network.sendRate = 29;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
         transform.rotation = Input.gyro.attitude;
         if (Input.GetKey(KeyCode.A))
         {
