@@ -12,6 +12,9 @@ public class Ctrl : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        Screen.orientation = ScreenOrientation.Portrait;
+
         if(!isLocalPlayer)
         {
             return;
@@ -19,9 +22,13 @@ public class Ctrl : NetworkBehaviour {
 
         Debug.Log("Gyro: "+SystemInfo.supportsGyroscope);
         Debug.Log("Gyro: "+Input.gyro.enabled);
-        Debug.Log(Input.gyro.attitude);
+        Debug.Log(Input.gyro.attitude.eulerAngles);
+        Debug.Log("GyroAccel: "+Input.gyro.userAcceleration);
 
-        transform.rotation = Input.gyddadadro.attitude;//TODO: Map gyro by axis
+
+        //transform.rotation = new Quaternion(Input.acceleration.x, Input.acceleration.y, Input.acceleration.z, 0f);
+
+        //transform.rotation = Quaternion.Euler(-Input.gyro.attitude.eulerAngles.x, -Input.gyro.attitude.eulerAngles.y, Input.gyro.attitude.eulerAngles.z);//TODO: Map gyro by axis
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-0.1f, 0f, 0f);
