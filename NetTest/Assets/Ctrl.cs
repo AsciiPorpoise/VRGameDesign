@@ -7,7 +7,8 @@ public class Ctrl : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
         Network.sendRate = 29;
-        Input.gyro.enabled = true;
+        StartCoroutine(printAccel());
+        //Input.gyro.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -19,12 +20,12 @@ public class Ctrl : NetworkBehaviour {
         {
             return;
         }
-
+        /*
         Debug.Log("Gyro: "+SystemInfo.supportsGyroscope);
         Debug.Log("Gyro: "+Input.gyro.enabled);
         Debug.Log(Input.gyro.attitude.eulerAngles);
         Debug.Log("GyroAccel: "+Input.gyro.userAcceleration);
-
+        */
 
         //transform.rotation = new Quaternion(Input.acceleration.x, Input.acceleration.y, Input.acceleration.z, 0f);
 
@@ -37,5 +38,12 @@ public class Ctrl : NetworkBehaviour {
         {
             transform.position += new Vector3(0.1f, 0f, 0f);
         }
+    }
+
+    IEnumerator printAccel()
+    {
+        Debug.Log("Accel: " + Input.acceleration + " xswingl: " + (Input.acceleration.x > 1.5) + " xswingr: " + (Input.acceleration.x < -1.5) + " yswingl: " + (Input.acceleration.y > 1.5) + " yswingr: " + (Input.acceleration.y < -1.5));
+        yield return new WaitForSeconds (0.5f);
+        StartCoroutine(printAccel());
     }
 }
