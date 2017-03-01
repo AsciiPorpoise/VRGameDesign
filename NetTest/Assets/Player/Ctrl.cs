@@ -4,10 +4,13 @@ using System.Collections;
 
 public class Ctrl : NetworkBehaviour {
 
+    Animator anim;
+
 	// Use this for initialization
 	void Start () {
         Network.sendRate = 29;
         StartCoroutine(printAccel());
+        anim = gameObject.GetComponentInChildren<Animator>();
         //Input.gyro.enabled = true;
 	}
 	
@@ -37,6 +40,14 @@ public class Ctrl : NetworkBehaviour {
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(0.1f, 0f, 0f);
+        }
+
+        if(System.Math.Abs(Input.acceleration.x) > 1.5 || System.Math.Abs(Input.acceleration.y) > 1.5)
+        {
+            anim.Play("Swinging");
+        } else
+        {
+            anim.Play("Entry");
         }
     }
 
