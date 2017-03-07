@@ -31,8 +31,8 @@ public class MotionControl2 extends UnityEngine.Networking.NetworkBehaviour {
             return;
         }
         transform.rotation = Input.gyro.attitude;
-        transform.up = -MovAverage(Input.acceleration.normalized);
-        transform.rotation.z = -transform.rotation.z;
+//        transform.up = -MovAverage(Input.acceleration.normalized);
+//        transform.rotation.z = -transform.rotation.z;
     }
 
 

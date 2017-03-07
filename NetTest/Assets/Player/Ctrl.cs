@@ -11,7 +11,7 @@ public class Ctrl : NetworkBehaviour {
         Network.sendRate = 29;
         StartCoroutine(printAccel());
         anim = gameObject.GetComponentInChildren<Animator>();
-        //Input.gyro.enabled = true;
+        Input.gyro.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -23,6 +23,11 @@ public class Ctrl : NetworkBehaviour {
         {
             return;
         }
+
+        //transform.Rotate(Input.gyro.rotationRateUnbiased.x, -Input.gyro.rotationRateUnbiased.y, Input.gyro.rotationRateUnbiased.z);
+        transform.up = -MovAverage(Input.acceleration.normalized);
+        transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, -transform.rotation.z, transform.rotation.w);
+
         /*
         Debug.Log("Gyro: "+SystemInfo.supportsGyroscope);
         Debug.Log("Gyro: "+Input.gyro.enabled);
@@ -42,13 +47,36 @@ public class Ctrl : NetworkBehaviour {
             transform.position += new Vector3(0.1f, 0f, 0f);
         }
 
-        if(System.Math.Abs(Input.acceleration.x) > 1.5 || System.Math.Abs(Input.acceleration.y) > 1.5)
+        if(Input.acceleration.x > 1.5 || Input.acceleration.y > 1.5 || Input.acceleration.x < -1.5 || Input.acceleration.y < -1.5)
         {
             anim.Play("Swinging");
+            Debug.Log("Swinging");
         } else
         {
-            anim.Play("Entry");
+//            anim.Play("Entry");
         }
+    }
+
+    private int sizeFilter = 15;
+    private Vector3[] filter;
+    private Vector3 filterSum = Vector3.zero;
+    private int posFilter = 0;
+    private int qSamples = 0;
+
+    Vector3 MovAverage(Vector3 sample)
+    {
+       if(qSamples == 0)
+        {
+            filter = new Vector3[sizeFilter];
+        }
+        filterSum += sample - filter[posFilter];
+        filter[posFilter++] = sample;
+        if(posFilter > qSamples)
+        {
+            qSamples = posFilter;
+        }
+        posFilter = posFilter % sizeFilter;
+        return filterSum / qSamples;
     }
 
     IEnumerator printAccel()
