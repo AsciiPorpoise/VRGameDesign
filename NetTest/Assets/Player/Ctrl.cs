@@ -5,19 +5,23 @@ using System.Collections;
 public class Ctrl : NetworkBehaviour {
 
     Animator anim;
+    [SyncVar]
+    public Vector3 accel;
 
 	// Use this for initialization
 	void Start () {
         Network.sendRate = 29;
-        StartCoroutine(printAccel());
         anim = gameObject.GetComponentInChildren<Animator>();
         Input.gyro.enabled = true;
+        if(!isLocalPlayer)
+            StartCoroutine(printAccel());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
         Screen.orientation = ScreenOrientation.Portrait;
+        accel = Input.acceleration;
 
         if(!isLocalPlayer)
         {
@@ -25,19 +29,10 @@ public class Ctrl : NetworkBehaviour {
         }
 
         //transform.Rotate(Input.gyro.rotationRateUnbiased.x, -Input.gyro.rotationRateUnbiased.y, Input.gyro.rotationRateUnbiased.z);
-        transform.up = -MovAverage(Input.acceleration.normalized);
+        transform.up = -MovAverage(accel.normalized);
         transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, -transform.rotation.z, transform.rotation.w);
 
-        /*
-        Debug.Log("Gyro: "+SystemInfo.supportsGyroscope);
-        Debug.Log("Gyro: "+Input.gyro.enabled);
-        Debug.Log(Input.gyro.attitude.eulerAngles);
-        Debug.Log("GyroAccel: "+Input.gyro.userAcceleration);
-        */
 
-        //transform.rotation = new Quaternion(Input.acceleration.x, Input.acceleration.y, Input.acceleration.z, 0f);
-
-        //transform.rotation = Quaternion.Euler(-Input.gyro.attitude.eulerAngles.x, -Input.gyro.attitude.eulerAngles.y, Input.gyro.attitude.eulerAngles.z);//TODO: Map gyro by axis
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-0.1f, 0f, 0f);
@@ -47,7 +42,7 @@ public class Ctrl : NetworkBehaviour {
             transform.position += new Vector3(0.1f, 0f, 0f);
         }
 
-        if(Input.acceleration.x > 1.5 || Input.acceleration.y > 1.5 || Input.acceleration.x < -1.5 || Input.acceleration.y < -1.5)
+        if(accel.x > 1.5 || accel.y > 1.5 || accel.x < -1.5 || accel.y < -1.5)
         {
             anim.Play("Swinging");
             Debug.Log("Swinging");
@@ -81,7 +76,7 @@ public class Ctrl : NetworkBehaviour {
 
     IEnumerator printAccel()
     {
-        Debug.Log("Accel: " + Input.acceleration + " xswingl: " + (Input.acceleration.x > 1.5) + " xswingr: " + (Input.acceleration.x < -1.5) + " yswingl: " + (Input.acceleration.y > 1.5) + " yswingr: " + (Input.acceleration.y < -1.5));
+        Debug.Log(Network.natFacilitatorIP+": Accel: " + accel + " xswingl: " + (accel.x > 1.5) + " xswingr: " + (accel.x < -1.5) + " yswingl: " + (accel.y > 1.5) + " yswingr: " + (accel.y < -1.5));
         yield return new WaitForSeconds (0.5f);
         StartCoroutine(printAccel());
     }
