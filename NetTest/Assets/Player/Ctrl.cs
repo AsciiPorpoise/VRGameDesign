@@ -5,8 +5,11 @@ using System.Collections;
 public class Ctrl : NetworkBehaviour {
 
     Animator anim;
+    public GameObject bulletPrefab;
+
     [SyncVar]
     public Vector3 accel;
+
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +44,10 @@ public class Ctrl : NetworkBehaviour {
         {
             transform.position += new Vector3(0.1f, 0f, 0f);
         }
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        {
+            CmdLaunchProjectile();
+        }
 
         if(accel.x > 1.5 || accel.y > 1.5 || accel.x < -1.5 || accel.y < -1.5)
         {
@@ -50,6 +57,24 @@ public class Ctrl : NetworkBehaviour {
         {
 //            anim.Play("Entry");
         }
+    }
+
+    [Command]
+    void CmdLaunchProjectile()
+    {
+        // create the bullet object from the bullet prefab
+        var bullet = (GameObject)Instantiate(
+            bulletPrefab,
+            transform.position - transform.forward,
+            Quaternion.identity);
+
+        // make the bullet move away in front of the player
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 25;
+
+        NetworkServer.Spawn(bullet);
+
+        // make bullet disappear after 2 seconds
+        Destroy(bullet, 2.0f);
     }
 
     private int sizeFilter = 15;
