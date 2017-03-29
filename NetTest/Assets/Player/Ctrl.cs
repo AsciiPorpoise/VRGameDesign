@@ -13,6 +13,7 @@ public class Ctrl : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        transform.position = new Vector3(0.1f, 1.8f, -3f);
         Network.sendRate = 29;
         anim = gameObject.GetComponentInChildren<Animator>();
         Input.gyro.enabled = true;
@@ -46,7 +47,8 @@ public class Ctrl : NetworkBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
-            CmdLaunchProjectile();
+            Debug.Log("TPos " + Input.GetTouch(0).position);
+            CmdLaunchProjectile(1);
         }
 
         if(accel.x > 1.5 || accel.y > 1.5 || accel.x < -1.5 || accel.y < -1.5)
@@ -60,12 +62,12 @@ public class Ctrl : NetworkBehaviour {
     }
 
     [Command]
-    void CmdLaunchProjectile()
+    void CmdLaunchProjectile(int spawn)
     {
         // create the bullet object from the bullet prefab
         var bullet = (GameObject)Instantiate(
             bulletPrefab,
-            transform.position - transform.forward,
+            GameObject.Find("PSpawn"+spawn).transform.position - transform.forward,
             Quaternion.identity);
 
         // make the bullet move away in front of the player
