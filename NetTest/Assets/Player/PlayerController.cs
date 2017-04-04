@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class Ctrl : NetworkBehaviour {
+public class PlayerController : NetworkBehaviour {
 
     Animator anim;
     public GameObject bulletPrefab;
@@ -45,11 +45,7 @@ public class Ctrl : NetworkBehaviour {
         {
             transform.position += new Vector3(0.1f, 0f, 0f);
         }
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
-        {
-            Debug.Log("TPos " + Input.GetTouch(0).position);
-            CmdLaunchProjectile(1);
-        }
+     
 
         if(accel.x > 1.5 || accel.y > 1.5 || accel.x < -1.5 || accel.y < -1.5)
         {
@@ -62,12 +58,12 @@ public class Ctrl : NetworkBehaviour {
     }
 
     [Command]
-    void CmdLaunchProjectile(int spawn)
+    public void CmdLaunchProjectile(int spawn)
     {
         // create the bullet object from the bullet prefab
         var bullet = (GameObject)Instantiate(
             bulletPrefab,
-            GameObject.Find("PSpawn"+spawn).transform.position - transform.forward,
+            GameObject.Find("PSpawn"+spawn).transform.position - GameObject.Find("PSpawn" + spawn).transform.forward,
             Quaternion.identity);
 
         // make the bullet move away in front of the player
