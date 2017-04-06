@@ -57,17 +57,25 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
-    [Command]
-    public void CmdLaunchProjectile(int spawn)
+    public void LaunchProjectile(int spawn)
     {
+        var spawner = GameObject.Find("PSpawn" + spawn);
+        Debug.Log(spawner);
+        CmdLaunchProjectile(spawner.transform.position, spawner.transform.forward);
+    }
+
+    [Command]
+    void CmdLaunchProjectile(Vector3 pos, Vector3 forward)
+    {
+   
         // create the bullet object from the bullet prefab
-        var bullet = (GameObject)Instantiate(
+        GameObject bullet = (GameObject)Instantiate(
             bulletPrefab,
-            GameObject.Find("PSpawn"+spawn).transform.position - GameObject.Find("PSpawn" + spawn).transform.forward,
+            pos - forward,
             Quaternion.identity);
 
         // make the bullet move away in front of the player
-        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 25;
+        bullet.GetComponent<Rigidbody>().velocity = forward * 25;
 
         NetworkServer.Spawn(bullet);
 
