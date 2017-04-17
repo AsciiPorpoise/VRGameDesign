@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTest.CSharp", "NetTest.CSharp.csproj", "{58A87094-D8EF-F63B-8520-9BB3A351AB17}"
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTest", "NetTest.csproj", "{76456C72-AD6F-439B-766A-62E3A75D649A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{58A87094-D8EF-F63B-8520-9BB3A351AB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58A87094-D8EF-F63B-8520-9BB3A351AB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58A87094-D8EF-F63B-8520-9BB3A351AB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58A87094-D8EF-F63B-8520-9BB3A351AB17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76456C72-AD6F-439B-766A-62E3A75D649A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76456C72-AD6F-439B-766A-62E3A75D649A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76456C72-AD6F-439B-766A-62E3A75D649A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76456C72-AD6F-439B-766A-62E3A75D649A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
