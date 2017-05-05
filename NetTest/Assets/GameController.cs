@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 
 public class GameController : NetworkManager {
@@ -13,6 +14,11 @@ public class GameController : NetworkManager {
     {
         netMgr = (NetworkManager) GetComponent<GameController>();
         menu = GameObject.Find("Menu");
+    }
+
+    public void Reboot()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void StartGame()
