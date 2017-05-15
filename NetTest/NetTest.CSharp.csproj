@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameController.cs" />
+    <Compile Include="Assets\HPUI.cs" />
+    <Compile Include="Assets\LoadMain.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Player\TouchController.cs" />
     <Compile Include="Assets\Player\WallController.cs" />

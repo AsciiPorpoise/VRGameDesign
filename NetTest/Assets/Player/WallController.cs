@@ -22,6 +22,14 @@ public class WallController : MonoBehaviour {
             collision.gameObject.GetComponent<ParticleSystem>().emissionRate = 100;
             Destroy(collision.gameObject, 0.2f);
             score++;
+
+            if(gameObject.name == "P1Wall")
+            {
+                GameObject.Find("P2HP").GetComponent<HPUI>().Hit(Random.Range(6f, 14f));
+            } else
+            {
+                GameObject.Find("P1HP").GetComponent<HPUI>().Hit(Random.Range(6f, 14f));
+            }
         }
         else
         {

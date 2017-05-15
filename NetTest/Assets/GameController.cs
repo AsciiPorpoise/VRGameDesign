@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameController : NetworkManager {
 
     private NetworkManager netMgr;
-    private GameObject menu;
+    private GameObject menu, hud;
 
     public static int playerNum = 1;
 
@@ -14,11 +15,20 @@ public class GameController : NetworkManager {
     {
         netMgr = (NetworkManager) GetComponent<GameController>();
         menu = GameObject.Find("Menu");
+        hud = GameObject.Find("HUD");
+        hud.SetActive(false);
     }
 
     public void Reboot()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(Reboot(0));
+    }
+
+    public static IEnumerator Reboot(int delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Reload");
+
     }
 
     public void StartGame()
@@ -31,6 +41,7 @@ public class GameController : NetworkManager {
         GameObject.Find("Toastr").GetComponent<Toastr>().Toast("Game Code: " + gameCode);
         netMgr.StartHost();
         menu.SetActive(false);
+        hud.SetActive(true);
     }
 
     public void JoinGame()
@@ -57,6 +68,7 @@ public class GameController : NetworkManager {
     {
         base.OnStopHost();
         menu.SetActive(true);
+        hud.SetActive(false);
         GameObject.Find("Toastr").GetComponent<Toastr>().Toast("Game Ended");
     }
 
@@ -65,6 +77,7 @@ public class GameController : NetworkManager {
     {
         base.OnStopClient();
         menu.SetActive(true);
+        hud.SetActive(false);
         GameObject.Find("Toastr").GetComponent<Toastr>().Toast("Client Disconnected");
     }
 
@@ -74,5 +87,14 @@ public class GameController : NetworkManager {
         return tokenizedIp[0] + "." + tokenizedIp[1];
     }
 
+    override
+    public void OnClientConnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+        if(numPlayers >=2)
+        {
+            conn.Disconnect();
+        }
+    }
 
 }
