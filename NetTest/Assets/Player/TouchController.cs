@@ -2,14 +2,26 @@
 
 public class TouchController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    private bool controlLock;
+
+    // Use this for initialization
+    void Start () {
+        // Lock Controls
+        controlLock = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         var playerCtrl = gameObject.GetComponent<PlayerController>();
+
+        if(controlLock)
+        {
+            if (GameController.playerNum >= 2)
+            {
+                controlLock = false;
+            }
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
