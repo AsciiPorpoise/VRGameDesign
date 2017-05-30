@@ -21,6 +21,8 @@ public class GameController : NetworkManager {
 
     public void Reboot()
     {
+        StopServer();
+        StopClient();
         StartCoroutine(Reboot(0));
     }
 

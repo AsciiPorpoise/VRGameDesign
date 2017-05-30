@@ -3,6 +3,7 @@
 public class TouchController : MonoBehaviour {
 
     private bool controlLock;
+    public GameObject playerPrefab;
 
     // Use this for initialization
     void Start () {
@@ -16,7 +17,7 @@ public class TouchController : MonoBehaviour {
 
         if(controlLock)
         {
-            if (GameController.playerNum >= 2)
+            if (Network.connections.Length >= 2)
             {
                 controlLock = false;
             }
